@@ -124,12 +124,13 @@ void find_file_type(char *path, std::list<std::string> &output)
         sprintf(pathStr, "%s%c%s", path, gap, filename->d_name);
         // 繼續下一層目錄
         find_file_type(pathStr, output);
+        // 釋放
+        free(pathStr);
+        pathStr = NULL;
     }
 
     // 關閉
     closedir(dp);
-    // 釋放
-    free(pathStr);
 }
 
 // help資訊
